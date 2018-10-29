@@ -1,6 +1,6 @@
 # Timeline
 
-| Date  | Task | Who is working on it|
+| Date Finish | Task |People|
 | ------------- | ------------- | --- |
 | Content Cell  | Content Cell  | --- |
 | Content Cell  | Content Cell  | --- |
