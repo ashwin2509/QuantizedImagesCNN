@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage[a4paper, left=3cm, right=3cm, top=2cm]{geometry} 
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\begin{document}
+
+\begin{center}
+	\Large{\bf{Project Proposal:
+	Classification of Quantized Images}}\\ { \small \textit{Lahiru D. Chamain Hewa Gamage} (915519699)}, {\small \textit{Chi Po Choi} (912494157)}, {\small \textit{Alex Shakouri} (912926780)}, {\small \textit{Ashwin Bhandare} (915550959)} \\
+	 {\small \today}
+\end{center}
+
+Quantization is an operation to map numbers with high precision to low precision with the purpose of reducing the number of bits to represent those numbers. If we quantize RGB data (spatial domain) we loose much more information compared to DCT (frequency domain) \cite{rao2014discrete}. In this project we will explore if an optimal way to quantize for a given classification accuracy exists. There is a lot of work on trying to use non spatial representation to represent the images. This paper proposes an architecture where they first do low level propessing and then use the output to do high level processing. \cite{DBLP:journals/corr/DiamondSBWH17}. Joint learning and classification \cite{jouppi2017datacenter, micikevicius2017mixed} recently has become an active research for better results given constraints.\\
+
+We start with a simple experiment on AlexNet on image classification. Suppose AlexNet with DCT un-quantized images as training data has accuracy $a_1$. We use the predefined quantization weight matrix ($\mathbf{W}_1$ corresponding to bandwidth $B_1$) to quantize the DCT coefficients and observe the accuracy $a_2 (\le a_1)$. $a_1$ and $a_2$ would be the benchmark for evaluating the performance of our models. The goal is to learn a quantization weight matrix which produces comparable accurarcy as $a_1$. We will design a neural network which integrate DCT quantization with the AlexNet, and try to find a quantization weight matrix $\mathbf{W}_2$ corresponding to bandwidth $B_2 (\le B_1)$ which can give a classification accuracy $a_3 (a_2 \le a_3 \leq a_1)$. Concurrently, to leverage DCT coefficients which are quantized in low precision, we will also design a neural network that perform low precision arithmetic directly on DCT coefficients, in order to speed up the training process.\\
+
+We will answer these questions: What is the best way to train such a joint framework? Does alternate training help? Does slowing down the quantizer help to converge well? How to design a better loss function with specific requirements? This also can be seen as a min-max game like GAN. As time permits, we can introduce GAN concepts in to this.\\
+
+We would be using Python language for the implementation of our project. The library that we would be using is Keras which is a high level API based on Tensorflow. Our working environment will be,
+\textbf{TensorFlow (python) + Keras + CUDA 9.0 + CuDNN 7.0.}\\
+We would also be using Google Cloud Credits for training our model. Every member in our group has 50\$ credit for the Google Cloud Credits and we are four of us, so we would be using 200\$ GCP credits. We would using the Google Cloud Service to make use of the K80 and P100 GPUs for training our model.
+
+
+%
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\bibliographystyle{abbrv}
+\bibliography{references}  % references.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+
+
+\end{document}
+
+ I have figured out how to implement the joint framework, as it seems it's only 50\%. 
+
+\section{CITED PAPERS}
+[1] Bag-of-visual-words and spatial extensions for land-use classification
+    They quantize the descriptors
+    Yi Yang and Shawn Newsam. 2010. Bag-of-visual-words and spatial extensions for land-use classification. In Proceedings of the 18th SIGSPATIAL International Conference on Advances in Geographic Information Systems (GIS '10). ACM, New York, NY, USA, 270-279. DOI=http://dx.doi.org/10.1145/1869790.1869829
+    
+[2] Discrete cosine transform: algorithms, advantages, applications
+    Rao, K. Ramamohan, and Ping Yip. Discrete cosine transform: algorithms, advantages, applications. Academic press, 2014.
+    
+[3] Combining support vector machine learning with the discrete cosine transform in image compression
+    J. Robinson and V. Kecman, "Combining support vector machine learning with the discrete cosine transform in image compression," in IEEE Transactions on Neural Networks, vol. 14, no. 4, pp. 950-958, July 2003.
+doi: 10.1109/TNN.2003.813842
