@@ -1,0 +1,11 @@
+Baseline
+1. start with CIFAR-10, RGB images
+2. Convert to YCbCr
+3. Take the DCT transformation -> quantize with W1
+4. NN - Renet8 record time and accuracy
+Experiment 1
+Joint quantization 
+1. How to code ceil activation function should be differentiable and efficient.
+2. How to train
+	a. Learning rates
+	b. Alternative traning and variations
